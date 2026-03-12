@@ -1,0 +1,39 @@
+# Program-12
+Program 12
+class Solution:
+    # Function to return a list containing the union of the two arrays.
+    def findUnion(self, a, b):
+        i, j = 0, 0
+        n, m = len(a), len(b)
+        res = []
+        
+        def add_to_res(val):
+            # Only add if the list is empty or the element is not a duplicate
+            if not res or res[-1] != val:
+                res.append(val)
+        
+        while i < n and j < m:
+            if a[i] < b[j]:
+                add_to_res(a[i])
+                i += 1
+            elif b[j] < a[i]:
+                add_to_res(b[j])
+                j += 1
+            else:
+                # Both are equal, add once and move both pointers
+                add_to_res(a[i])
+                i += 1
+                j += 1
+        
+        # Add remaining elements from array a
+        while i < n:
+            add_to_res(a[i])
+            i += 1
+            
+        # Add remaining elements from array b
+        while j < m:
+            add_to_res(b[j])
+            j += 1
+            
+        return res
+        
